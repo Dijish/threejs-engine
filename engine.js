@@ -42,7 +42,7 @@ function init() {
         }
     };
 
-    //DAT.GUI Related Stuff
+    // //DAT.GUI Related Stuff
     // var gui = new dat.GUI();
     // var cam = gui.addFolder('Camera');
     // cam.add(options.camera, 'speed', 0, 0.0010).listen();
@@ -54,52 +54,45 @@ function init() {
     // cam.add(camera.position, 'z', -100, 100).listen();
     // cam.open();
 
-    // Instantiate a loader
-    var loader = new THREE.GLTFLoader();
-    // //Load a glTF resource
-    loader.load('models/engine2/untitled1.gltf',// resource URL
-        function ( gltf ) { // called when the resource is loaded
-            scene.add( gltf.scene );
-        },function ( xhr ) {// called while loading is progressing
-            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },function ( error ) {// called when loading has errors
-            console.log( 'An error happened' );
-        }
-    );
+    // model
+    var loader = new THREE.FBXLoader();
+    loader.load( 'models/untitled.fbx', function ( object ) {
+        scene.add( object );
+    } );
 
-    // Load Object
-    // var loader=new THREE.ObjectLoader();
-    // loader.load("models/engine1/jet_engine.obj",function(object){
-    //     scene.add(object);
-    // },function ( err ) {
-    //     console.error( 'An error happened',err );
-    // });
-    
-    camera.rotation.x = 3;  
-    camera.rotation.z = 3;
-    camera.rotation.y = -1;
+    camera.rotation.x = 0;  
+    camera.rotation.z = 0;
+    camera.rotation.y = 0;
 
-    camera.position.x = -34; 
-    camera.position.z = -5;
-    camera.position.y = -1;
+    camera.position.x = 17; 
+    camera.position.z = 177;
+    camera.position.y = 12;
 
     // Circle 1
-    var geometry = new THREE.CircleGeometry( 0.5, 32 );
+    var geometry = new THREE.CircleGeometry( 4, 32 );
     var material = new THREE.MeshBasicMaterial( { color: 0xdf4b4e } );
     circle1 = new THREE.Mesh( geometry, material );
     //circle1.rotateX( 300 );
-    circle1.position.y=6.4;
-    circle1.position.x=2;
-    circle1.position.z=2.2;
+    circle1.position.y=-3;
+    circle1.position.x=-17;
+    circle1.position.z=-28;
+    circle1.callback = function() { alert("Open issues of Right Engine"); }
+    // var box = gui.addFolder('circle');
+    // box.add(circle1.position, 'x', -70, 70).name('x').listen();
+    // box.add(circle1.position, 'y', -70, 70).name('y').listen();
+    // box.add(circle1.position, 'z', -70, 70).name('z').listen();
+    // box.add(circle1.rotation, 'x', -70, 70).name('ro-x').listen();
+    // box.add(circle1.rotation, 'y', -70, 70).name('ro-y').listen();
+    // box.add(circle1.rotation, 'z', -70, 70).name('ro-z').listen();
+    // box.open();
     circle1.callback = function() { alert("Open issues of Cockpit"); }
-    
     scene.add( circle1 );
     controls.update();
     var loader = new THREE.FontLoader();
     loader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
         var geometry = new THREE.TextGeometry( '1', {
             font: font,
-            size: 0.5,
+            size: 4,
             height: 0,
             curveSegments: 5,
         } );
@@ -109,32 +102,34 @@ function init() {
         ];
         var mesh = new THREE.Mesh( geometry, materials );
         //mesh.rotateX( 300 );
-        mesh.position.y=6.2;
-        mesh.position.x=1.8;
-        mesh.position.z=2.2;
+        mesh.position.y=-4.5;
+        mesh.position.x=-20;
+        mesh.position.z=-27.5;
+        // var box = gui.addFolder('number');
+        // box.add(mesh.position, 'x', -70, 70).name('x').listen();
+        // box.add(mesh.position, 'y', -70, 70).name('y').listen();
+        // box.add(mesh.position, 'z', -70, 70).name('z').listen();
+        // box.open();
         scene.add( mesh );
         scene.add( mesh );
     } );
 
     // Circle 2
-    var geometry = new THREE.CircleGeometry( 0.5, 32 );
+    var geometry = new THREE.CircleGeometry( 4, 32 );
     var material = new THREE.MeshBasicMaterial( { color: 0xdf4b4e } );
     circle2 = new THREE.Mesh( geometry, material );
-    //circle2.rotateZ( 100 );
-    circle2.position.y=6.6;
-    circle2.position.x=9;
-    circle2.position.z=-2;
-    circle2.rotation.y=-11;
-    circle2.rotation.x=1;
-    circle2.rotation.z=3.29;
-    circle2.callback = function() { alert("Open issues of Right Wing"); }
+    //circle2.rotateX( 300 );
+    circle2.position.y=-3;
+    circle2.position.x=63;
+    circle2.position.z=-11;
+    circle2.callback = function() { alert("Open issues of Right Engine"); }
     scene.add( circle2 );
     controls.update();
     var loader = new THREE.FontLoader();
     loader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
-        var geometry = new THREE.TextGeometry( '1', {
+        var geometry = new THREE.TextGeometry( '2', {
             font: font,
-            size: 0.5,
+            size: 4,
             height: 0,
             curveSegments: 5,
         } );
@@ -144,26 +139,24 @@ function init() {
         ];
         var mesh = new THREE.Mesh( geometry, materials );
         //mesh.rotateX( 300 );
-        mesh.position.y=6.4;
-        mesh.position.x=9.1;
-        mesh.position.z=-1.7;
-        mesh.rotation.y=-11;
-        mesh.rotation.x=10.2;
-        mesh.rotation.z=2.3;
+        mesh.position.y=-4.5;
+        mesh.position.x=61.5;
+        mesh.position.z=-10.9;
+        scene.add( mesh );
         scene.add( mesh );
     } );
 
     // Circle 3
-    var geometry = new THREE.CircleGeometry( 0.5, 32 );
+    var geometry = new THREE.CircleGeometry( 4, 32 );
     var material = new THREE.MeshBasicMaterial( { color: 0xdf4b4e } );
     circle3 = new THREE.Mesh( geometry, material );
-    //circle3.rotateX( 180 );
-    circle3.position.y=6.2;
-    circle3.position.x=7.1;
-    circle3.position.z=-4.6;
-    circle3.rotation.y=-13;
-    circle3.rotation.x=3.1;
-    circle3.rotation.z=-7.3;
+    //circle3.rotateY( 250 );
+    circle3.position.y=4.5;
+    circle3.position.x=34;
+    circle3.position.z=21;
+    // circle3.rotation.y=-7;
+    // circle3.rotation.x=-6.5;
+    // circle3.rotation.z=9;
     circle3.callback = function() { alert("Open issues of Left Engine"); }
     scene.add( circle3 );
     controls.update();
@@ -171,7 +164,7 @@ function init() {
     loader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
         var geometry = new THREE.TextGeometry( '1', {
             font: font,
-            size: 0.5,
+            size: 4,
             height: 0,
             curveSegments: 5,
         } );
@@ -181,47 +174,32 @@ function init() {
         ];
         var mesh = new THREE.Mesh( geometry, materials );
         //mesh.rotateX( 300 );
-        mesh.position.y=6;
-        mesh.position.x=7.3;
-        mesh.position.z=-4.8;
-        mesh.rotation.y=10;
-        mesh.rotation.x=0;
-        mesh.rotation.z=0;
-
-        // var box = gui.addFolder('number');
-        // box.add(mesh.position, 'x', -10, 10).name('x').listen();
-        // box.add(mesh.position, 'y', -10, 10).name('y').listen();
-        // box.add(mesh.position, 'z', -10, 10).name('z').listen();
-        // box.add(mesh.rotation, 'x', -20, 20).name('ro-x').listen();
-        // box.add(mesh.rotation, 'y', -20, 20).name('ro-y').listen();
-        // box.add(mesh.rotation, 'z', -20, 10).name('ro-z').listen();
-        // box.open();
-
+        mesh.position.y=3.4;
+        mesh.position.x=32;
+        mesh.position.z=21.5;
+        // mesh.rotation.y=-7;
+        // mesh.rotation.x=-6.5;
+        // mesh.rotation.z=9;
+        scene.add( mesh );
         scene.add( mesh );
     } );
 
     // Circle 4
-    var geometry = new THREE.CircleGeometry( 0.5, 32 );
+    var geometry = new THREE.CircleGeometry( 4, 32 );
     var material = new THREE.MeshBasicMaterial( { color: 0xdf4b4e } );
     circle4 = new THREE.Mesh( geometry, material );
-    //circle4.rotateX( 300 );
-    circle4.position.y=8.9;
-    circle4.position.x=-0.4;
-    circle4.position.z=-5.3;
-    circle4.rotation.y=-19;
-    circle4.rotation.x=-3.1;
-    circle4.rotation.z=-3.7;
-    circle4.callback = function() { alert("Open issues of Right Wing"); }
-
+    //circle4.rotateX( 240 );
+    circle4.position.y=14.4;
+    circle4.position.x=50;
+    circle4.position.z=-15;
     circle4.callback = function() { alert("Open issues of Right Engine"); }
-    
     scene.add( circle4 );
     controls.update();
     var loader = new THREE.FontLoader();
     loader.load( 'fonts/helvetiker_bold.typeface.json', function ( font ) {
         var geometry = new THREE.TextGeometry( '1', {
             font: font,
-            size: 0.5,
+            size: 4,
             height: 0,
             curveSegments: 5,
         } );
@@ -231,13 +209,9 @@ function init() {
         ];
         var mesh = new THREE.Mesh( geometry, materials );
         //mesh.rotateX( 300 );
-        mesh.position.y=8.6;
-        mesh.position.x=-0.21;
-        mesh.position.z=-5.5;
-        mesh.rotation.y=-13;
-        mesh.rotation.x=-3.1;
-        mesh.rotation.z=-3.3;
-        
+        mesh.position.y=12;
+        mesh.position.x=48;
+        mesh.position.z=-14.5;
         scene.add( mesh );
         scene.add( mesh );
     } );
