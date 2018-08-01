@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ThreeJS Crash Course</title>
 
+    <script src="jquery.min.js"></script>
+    <script src="heartcode-canvasloader-min.js"></script>
+
     <style>
         body{background-color: black}
         canvas{width: 100%;height: 100%;} */
@@ -13,11 +16,42 @@
             width:100%;
             height: 100%;
         }
+        .onepix-imgloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+}
+
+/*hide the second element in the loading container (first element is the leading img)*/
+.loading-container > *:not(.onepix-imgloader) {
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    -khtml-opacity:0;
+    opacity:0;
+}
+
+.loading-container {
+    position: relative;
+    /* background: #dfdfdf;
+    min-height: 40px;
+    height: 400px; */
+}
+
+#container {
+/*    min-width: 400px;*/
+    min-height: 400px;
+}
     </style>
 </head>
 <body>
 
-    <div id="aircraft-canvas">
+    <div class = "loading-container">
+        <div id="container">  
+                <div id="aircraft-canvas"></div>                   
+        </div>
+        
+    </div>
 
     <script src="three.min.js"></script>
     <script src="OrbitControls.js"></script>

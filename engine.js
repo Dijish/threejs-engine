@@ -1,6 +1,29 @@
+$(document).ready(function () {
 var renderer,camera,circle1,circle2,circle3,circle4;
 
 function init() {
+
+    if ($('.loading-container').length) {
+
+        // to show loading animation
+        $imgloader = $('.loading-container');
+        $loadingimg = $('<div id="canvasloader-container" class="onepix-imgloader"></div>');
+
+        // $loadingimg.attr("src","images/flexslider/loading.gif");
+        $imgloader.prepend($loadingimg);
+
+        // canvasloader code
+        var cl = new CanvasLoader('canvasloader-container');
+        cl.setColor('#4f4f4f'); // default is '#000000'
+        cl.setDiameter(45); // default is 40
+        cl.setDensity(75); // default is 40
+        cl.setRange(0.7); // default is 1.3
+        cl.setSpeed(3); // default is 2
+        cl.setFPS(22); // default is 24
+        cl.show(); // Hidden by default
+
+    }
+
 
     var container = document.getElementById("aircraft-canvas");
     var CANVAS_WIDTH = window.innerWidth;
@@ -54,8 +77,20 @@ function init() {
     // cam.add(camera.position, 'z', -100, 100).listen();
     // cam.open();
 
+    var manager = new THREE.LoadingManager();
+    manager.onLoad = function () {
+        console.log('all items loaded');
+        allItemsLoaded();
+    };
+
+    function allItemsLoaded() {
+        $('.onepix-imgloader').fadeOut();
+        // fade in content (using opacity instead of fadein() so it retains it's height.
+        $('.loading-container > *:not(.onepix-imgloader)').fadeTo(8000, 100);
+    }
+
     // model
-    var loader = new THREE.FBXLoader();
+    var loader = new THREE.FBXLoader(manager);
     loader.load( 'models/untitled.fbx', function ( object ) {
         scene.add( object );
     } );
@@ -277,3 +312,4 @@ window.onload = function() {
     document.addEventListener('mousedown', onDocumentMouseDown, false);
     document.addEventListener('mousemove', onDocumentMouseMove, false);
 };
+});
